@@ -3,11 +3,56 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
-GET     /acerca                     controllers.Application.acerca
+#GET     /indice					controllers.Application.index
+#GET     /acerca                    controllers.Application.acerca
 
 # Search
-GET     /response                   controllers.Search.responseSearch
+GET     /response                  	controllers.Application.responseSearch
+
+# testPaginacionGrid
+GET     /testpaginaciongrid        	controllers.Application.testPaginacionGrid
+
+# Roles
+GET     /roleshome                  controllers.Roles.index
+
+# Precios
+GET     /precioshome                  controllers.Precios.index
+
+# Categorias
+GET     /categoriashome                  controllers.Categorias.index
+
+# Componentes
+GET     /componenteshome                  controllers.Componentes.index
+GET     /listacomponentes                  controllers.Componentes.lista
+
+# Usuarios
+GET     /usuarioshome                  controllers.Usuarios.index
+GET     /nuevousuario                  controllers.Usuarios.newusuario
+GET     /nuevousuariolight             controllers.Usuarios.newusuariolight
+
+# Paquetes
+GET     /paqueteshome                  controllers.Paquetes.index
+GET     /listapaquetes                  controllers.Paquetes.list
+
+# Funerarias
+GET     /funerariashome                  controllers.Funerarias.index
+
+
+GET     /                           controllers.Application.index
+# Computers list (look at the default values for pagination parameters)
+GET     /computers                  controllers.Application.list(p:Int ?= 0, s:Int ?= 2, f ?= "")
+
+# Add computer
+GET     /computers/new              controllers.Application.create
+POST    /computers                  controllers.Application.save
+
+# Edit existing computer
+GET     /computers/:id              controllers.Application.edit(id:Long)
+POST    /computers/:id              controllers.Application.update(id:Long)
+
+# Delete a computer
+POST    /computers/:id/delete       controllers.Application.delete(id:Long)
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

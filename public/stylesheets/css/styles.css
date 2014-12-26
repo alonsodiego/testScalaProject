@@ -16,8 +16,6 @@ h1,h2,h3,.highlight,.navbar a,#masthead h4 {
 }
 
 footer {
-
-  margin-top:40px;
   padding-top:40px;
   padding-bottom:40px;
   background-color:#cecece;
@@ -165,3 +163,28 @@ a,a:hover {
 .btn-twitter:hover {background-color:#3088FF;color:#62BBFF;}
 .btn-facebook:hover {background-color:#2A4998;color:#4C6BBA;}
 .btn-google-plus:hover {background-color:#C23836;color:#E45A58;}
+
+/*
+ *		LAYOUT SECOND
+ */
+
+
+#masthead-second {
+  background-color:#000044;
+  color:#aaaacc;
+}
+
+ #masthead-second h1 {
+  font-size: 30px;
+  line-height: 1;
+  color:#fefeff;
+  margin-top:15px;
+}
+
+#masthead-second .well {
+  margin-top:31px;
+  background-color:#111166;
+  border-color:#000022;
+  color:#efefff;
+  min-height:127px;
+}

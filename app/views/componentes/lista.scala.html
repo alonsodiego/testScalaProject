@@ -1,0 +1,338 @@
+@layouts.second(title = "Lista de Componentes") {
+
+<script type="text/javascript">
+$(function(){
+    // This code is not even almost production ready. It's 2am here, and it's a cheap proof-of-concept if anything.
+    $(".img-modal-btn.right").on('click', function(e){
+        e.preventDefault();
+        cur = $(this).parent().find('img:visible()');
+        next = cur.next('img');
+        par = cur.parent();
+        if (!next.length) { next = $(cur.parent().find("img").get(0)) }
+        cur.addClass('hidden');
+        next.removeClass('hidden');
+        
+        return false;
+    })
+    
+    $(".img-modal-btn.left").on('click', function(e){
+        e.preventDefault();
+        cur = $(this).parent().find('img:visible()');
+        next = cur.prev('img');
+        par = cur.parent();
+        children = cur.parent().find("img");
+        if (!next.length) { next = $(children.get(children.length-1)) }
+        cur.addClass('hidden');
+        next.removeClass('hidden');
+        
+        return false;
+    })
+
+});
+</script>
+
+<style type="text/css">
+html, body { height: 100%;}
+
+/* So that the modal is displayed in the preview.. You can probably remove this and the above rule */
+.img-modal {
+  display: block;
+}
+
+.img-modal .modal-dialog {
+    /* An arbitrary minimum height. Feel free to modify this one as well */
+    min-height: 350px;
+    height: 80%;
+}
+
+.img-modal .modal-content, .img-modal .modal-body, .img-modal .row, .img-modal .modal-image {
+    height: 100%;
+}
+
+.modal-content {
+    border-radius: 0;
+}
+
+.modal-body {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.modal-image {
+    background: #000;
+    padding :0;
+}
+
+.modal-image img {
+    margin: 0 auto;
+    max-height: 200px;
+    max-width: 100%;
+    
+    position: relative;
+    top: 50%;
+}
+
+.img-modal .img-modal-btn {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: black;
+    opacity: 0;
+    font-size: 1.5em;
+    width: 45px;
+    color: #fff;
+    transition: opacity .2s ease-in;
+}
+
+.img-modal .modal-image:hover .img-modal-btn {
+    opacity: 0.4;  
+}
+
+.img-modal .modal-image:hover .img-modal-btn:hover {
+   opacity: 0.75;   
+}
+
+.img-modal .img-modal-btn.right {
+    right: 0;
+}
+
+.img-modal .img-modal-btn i {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin-top: -.75em;
+}
+
+.img-modal .modal-meta {
+    position: relative;   
+    height: 100%;
+}
+
+.img-modal .modal-meta-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 45px;
+    padding: 5px 10px;
+    overflow-y: auto;
+}
+
+.img-modal .modal-meta-top .img-poster img {
+    height: 70px;
+    width: 70px;
+    float: left;
+    margin-right: 15px;
+}
+
+.img-modal .modal-meta-top .img-poster strong {
+    display: block; 
+    padding-top: 15px;
+}
+
+.img-modal .modal-meta-top .img-poster span {
+    display: block;   
+    color: #aaa;
+    font-size:.9em;
+}
+
+.img-modal .modal-meta-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 5px;
+    border-top: solid 1px #ccc;
+}
+
+.img-modal .img-comment-list {
+    list-style: none;  
+    padding: 0;
+}
+.img-modal .img-comment-list li {
+    margin:0;
+    margin-top:10px;
+}
+
+.img-modal .img-comment-list li > div {
+    display:table-cell;
+}
+
+.img-modal .img-comment-list img {
+    border-radius:50%;
+    width: 42px;
+    height: 42px;
+    margin-right: 10px;
+    margin-top: 20px;
+}
+
+.img-modal .img-comment-list p {
+    margin: 0;
+}
+
+.img-modal .img-comment-list span {
+    font-size: .8em; 
+    color: #aaa;
+}
+</style>
+<br/>
+<div class="row-fluid">
+    <div id="filter-panel" class="filter-panel">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-inline" role="form">
+                        <div class="form-group">
+                            <label class="filter-col" style="margin-right:0;" for="pref-perpage">Filas por P&aacute;gina:</label>
+                            <select id="pref-perpage" class="form-control">
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option selected="selected" value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                                <option value="200">200</option>
+                                <option value="300">300</option>
+                                <option value="400">400</option>
+                                <option value="500">500</option>
+                                <option value="1000">1000</option>
+                            </select>                                
+                        </div> <!-- form group [rows] -->
+                        <div class="form-group">
+                            <label class="filter-col" style="margin-right:0;" for="pref-search">Buscar:</label>
+                            <input type="text" class="form-control input-sm" id="pref-search">
+                        </div><!-- form group [search] -->
+                        <div class="form-group">
+                            <label class="filter-col" style="margin-right:0;" for="pref-orderby">Ordenar por:</label>
+                            <select id="pref-orderby" class="form-control">
+                                <option>Descendente</option>
+                            </select>                                
+                        </div> <!-- form group [order by] --> 
+                        <div class="form-group">    
+                            <div class="checkbox" style="margin-left:10px; margin-right:10px;">
+                                <label><input type="checkbox">Recordar Par&aacute;metros</label>
+                            </div>
+                            <button type="submit" class="btn btn-default filter-col">
+                                <span class="glyphicon glyphicon-record"></span>Buscar
+                            </button>  
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+<br/>
+<div class="row-fluid">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <a data-toggle="modal" data-target="#myModal">
+                  Componente Flores
+                </a>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div class="img-modal">
+                <div class="col-md-8 modal-image">
+                    <img class="img-responsive " src="http://www.pimart.eu/wp-content/uploads/2014/04/martin-schoeller-george-clooney-portrait-up-close-and-personal.jpeg">
+                    <img class="img-responsive hidden" src="http://upload.wikimedia.org/wikipedia/commons/1/1a/Bachalpseeflowers.jpg" />
+                    <img class="img-responsive hidden" src="http://www.netflights.com/media/216535/hong%20kong_03_681x298.jpg" />
+                                    
+                    <a href="" class="img-modal-btn left"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                    <a href="" class="img-modal-btn right"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                </div>
+                <div class="col-md-4">
+                      <div class="media-body fnt-smaller">
+                                <a href="#" target="_parent"></a>
+
+                                <h4 class="media-heading">
+                                  <a href="#" target="_parent">$1,975,000 <small class="pull-right">609 W Gravers Ln</small></a></h4>
+
+
+                                <ul class="list-inline mrg-0 btm-mrg-10 clr-535353">
+                                    <li>4,820 SqFt</li>
+
+                                    <li style="list-style: none">|</li>
+
+                                    <li>5 Beds</li>
+
+                                    <li style="list-style: none">|</li>
+
+                                    <li>5 Baths</li>
+                                </ul>
+
+                                <p class="hidden-xs">Situated between fairmount
+                                park and the prestigious philadelphia cricket
+                                club, this beautiful 2+ acre property is truly
+                                ...</p><span class="fnt-smaller fnt-lighter fnt-arial">Courtesy of HS Fox & Roach-Chestnut Hill
+                                Evergreen</span>
+                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="row-fluid">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <a data-toggle="modal" data-target="#myModal">
+                  Componente Limusina
+                </a>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div class="img-modal">
+                <div class="col-md-8 modal-image">
+                    <img class="img-responsive " src="http://www.pimart.eu/wp-content/uploads/2014/04/martin-schoeller-george-clooney-portrait-up-close-and-personal.jpeg">
+                    <img class="img-responsive hidden" src="http://upload.wikimedia.org/wikipedia/commons/1/1a/Bachalpseeflowers.jpg" />
+                    <img class="img-responsive hidden" src="http://www.netflights.com/media/216535/hong%20kong_03_681x298.jpg" />
+                                    
+                    <a href="" class="img-modal-btn left"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                    <a href="" class="img-modal-btn right"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                </div>
+                <div class="col-md-4">
+                      <div class="media-body fnt-smaller">
+                                <a href="#" target="_parent"></a>
+
+                                <h4 class="media-heading">
+                                  <a href="#" target="_parent">$1,975,000 <small class="pull-right">609 W Gravers Ln</small></a></h4>
+
+
+                                <ul class="list-inline mrg-0 btm-mrg-10 clr-535353">
+                                    <li>4,820 SqFt</li>
+
+                                    <li style="list-style: none">|</li>
+
+                                    <li>5 Beds</li>
+
+                                    <li style="list-style: none">|</li>
+
+                                    <li>5 Baths</li>
+                                </ul>
+
+                                <p class="hidden-xs">Situated between fairmount
+                                park and the prestigious philadelphia cricket
+                                club, this beautiful 2+ acre property is truly
+                                ...</p><span class="fnt-smaller fnt-lighter fnt-arial">Courtesy of HS Fox & Roach-Chestnut Hill
+                                Evergreen</span>
+                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+        
