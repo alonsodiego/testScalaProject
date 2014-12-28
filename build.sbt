@@ -11,7 +11,7 @@ libraryDependencies ++= Seq(
   anorm,
   cache,
   ws,
-  "postgresql" % "postgresql" % "9.1-901-1.jdbc4",
+  "org.postgresql" % "postgresql" % "9.3-1102-jdbc4"
   "com.typesafe.slick" %% "slick" % "2.1.0",
   "com.typesafe.play" %% "play-slick" % "0.8.1",
   "joda-time" % "joda-time" % "2.4",
